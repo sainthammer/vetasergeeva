@@ -1,0 +1,76 @@
+{% extends "landing/base.html" %}
+{% block title %}Контакты — VETA SERGEEVA{% endblock %}
+{% block nav_contact %}is-active{% endblock %}
+
+{% block content %}
+{% if page %}
+<section class="inner-hero">
+  <div class="eyebrow reveal">{{ page.hero_eyebrow }}</div>
+  <h1 class="reveal reveal-delay-1">{{ page.hero_title }}</h1>
+  <p class="inner-lead reveal reveal-delay-2">
+    {{ page.hero_text }}
+  </p>
+</section>
+
+<section class="section contact-layout">
+  <div class="contact-card reveal">
+    <div class="card-kicker">{{ page.card_kicker }}</div>
+    <h2>{{ page.card_title }}</h2>
+
+    <div class="contact-list">
+      {% if page.email %}
+        <a href="mailto:{{ page.email }}">{{ page.email }}</a>
+      {% endif %}
+
+      {% if page.telegram_url and page.telegram_label %}
+        <a href="{{ page.telegram_url }}" target="_blank" rel="noopener">{{ page.telegram_label }}</a>
+      {% endif %}
+
+      {% if page.instagram_url and page.instagram_label %}
+        <a href="{{ page.instagram_url }}" target="_blank" rel="noopener">{{ page.instagram_label }}</a>
+      {% endif %}
+    </div>
+  </div>
+
+  <form class="contact-form reveal reveal-delay-1" method="post">
+    {% csrf_token %}
+
+    {% if success %}
+      <div class="form-success">
+        Спасибо. Заявка отправлена.
+      </div>
+    {% endif %}
+
+    <label>
+      <span>Ваше имя</span>
+      {{ form.name }}
+      {% if form.name.errors %}
+        <div class="form-error">{{ form.name.errors }}</div>
+      {% endif %}
+    </label>
+
+    <label>
+      <span>Контакт</span>
+      {{ form.contact }}
+      {% if form.contact.errors %}
+        <div class="form-error">{{ form.contact.errors }}</div>
+      {% endif %}
+    </label>
+
+    <label>
+      <span>О проекте</span>
+      {{ form.message }}
+      {% if form.message.errors %}
+        <div class="form-error">{{ form.message.errors }}</div>
+      {% endif %}
+    </label>
+
+    <button class="btn btn-primary" type="submit">Отправить</button>
+  </form>
+</section>
+{% else %}
+<section class="inner-hero">
+  <h1>Страница контактов пока не заполнена</h1>
+</section>
+{% endif %}
+{% endblock %}

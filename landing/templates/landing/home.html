@@ -1,0 +1,100 @@
+{% extends "landing/base.html" %}
+{% block title %}VETA SERGEEVA — дизайнер и SMM-менеджер{% endblock %}
+{% block nav_home %}is-active{% endblock %}
+
+{% block content %}
+{% if page %}
+<section class="hero hero-home">
+  <div class="eyebrow reveal">{{ page.hero_eyebrow }}</div>
+
+  <div class="hero-grid">
+    <div>
+      <h1 class="hero-title reveal reveal-delay-1">
+        {{ page.hero_title }}
+      </h1>
+
+      <p class="hero-text reveal reveal-delay-2">
+        {{ page.hero_text }}
+      </p>
+
+      <div class="hero-actions reveal reveal-delay-3">
+        <a class="btn btn-primary" href="{{ page.hero_primary_button_url }}">
+          {{ page.hero_primary_button_text }}
+        </a>
+        <a class="btn btn-secondary" href="{{ page.hero_secondary_button_url }}">
+          {{ page.hero_secondary_button_text }}
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-card floating-card reveal">
+      <div class="card-kicker">{{ page.hero_card_kicker }}</div>
+      <div class="floating-lines">
+        <span></span><span></span><span></span>
+      </div>
+      <div class="hero-card-title">{{ page.hero_card_title }}</div>
+      <p class="muted">
+        {{ page.hero_card_text }}
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="stats-section">
+  <div class="stats-grid">
+    {% for stat in page.stats.all %}
+      <div class="stat reveal {% if forloop.counter == 2 %}reveal-delay-1{% elif forloop.counter == 3 %}reveal-delay-2{% endif %}">
+        <span>{{ stat.value }}</span>
+        <p>{{ stat.description }}</p>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head reveal">
+    <div class="eyebrow">{{ page.services_eyebrow }}</div>
+    <h2>{{ page.services_title }}</h2>
+  </div>
+
+  <div class="services-preview">
+    {% for service in page.services.all %}
+      <article class="service-card reveal {% if forloop.counter == 2 %}reveal-delay-1{% elif forloop.counter == 3 %}reveal-delay-2{% endif %}">
+        <h3>{{ service.title }}</h3>
+        <p>{{ service.description }}</p>
+      </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section split-section">
+  <div class="section-head reveal">
+    <div class="eyebrow">{{ page.approach_eyebrow }}</div>
+    <h2>{{ page.approach_title }}</h2>
+  </div>
+
+  <div class="split-grid">
+    {% for step in page.approach_steps.all %}
+      <div class="info-block reveal {% if forloop.counter == 2 %}reveal-delay-1{% elif forloop.counter == 3 %}reveal-delay-2{% endif %}">
+        <div class="info-number">{{ step.number }}</div>
+        <p>{{ step.description }}</p>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="cta-panel reveal">
+  <div>
+    <div class="eyebrow">{{ page.cta_eyebrow }}</div>
+    <h2>{{ page.cta_title }}</h2>
+  </div>
+  <a class="btn btn-primary" href="{{ page.cta_button_url }}">
+    {{ page.cta_button_text }}
+  </a>
+</section>
+{% else %}
+<section class="hero hero-home">
+  <h1>Главная страница пока не заполнена</h1>
+</section>
+{% endif %}
+{% endblock %}

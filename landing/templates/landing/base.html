@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Portfolio{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}Дизайнер и SMM-менеджер. Минималистичный многостраничный лендинг-визитка.{% endblock %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'landing/css/style.css' %}">
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+  <div class="grain"></div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="{% url 'landing:index_view' %}">
+      <span class="brand-name">VETA SERGEEVA</span>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-label="Открыть меню" data-nav-toggle>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="site-nav" data-nav>
+      <a href="{% url 'landing:index_view' %}" class="{% block nav_home %}{% endblock %}">Главная</a>
+      <a href="{% url 'landing:about_view' %}" class="{% block nav_about %}{% endblock %}">Обо мне</a>
+      <a href="{% url 'landing:services_view' %}" class="{% block nav_services %}{% endblock %}">Услуги</a>
+      <a href="{% url 'landing:portfolio_view' %}" class="{% block nav_portfolio %}{% endblock %}">Портфолио</a>
+      <a href="{% url 'landing:contacts_view' %}" class="{% block nav_contact %}{% endblock %}">Контакты</a>
+    </nav>
+  </div>
+</header>
+
+  <div class="page-shell">
+    <main>
+      {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer reveal">
+      <div>
+        <div class="footer-label">Designer & SMM</div>
+        <div class="footer-title">Минималистичный цифровой образ бренда.</div>
+      </div>
+      <div class="footer-links">
+        <a href="mailto:hello@example.com">hello@example.com</a>
+        <a href="https://t.me/username" target="_blank" rel="noopener">Telegram</a>
+        <a href="https://instagram.com/username" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </footer>
+  </div>
+
+  <div class="cursor-glow"></div>
+  <script src="{% static 'landing/js/main.js' %}"></script>
+  {% block extra_scripts %}{% endblock %}
+</body>
+</html>

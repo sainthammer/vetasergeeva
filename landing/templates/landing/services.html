@@ -1,0 +1,47 @@
+{% extends "landing/base.html" %}
+{% block title %}Услуги — VETA SERGEEVA{% endblock %}
+{% block nav_services %}is-active{% endblock %}
+
+{% block content %}
+{% if page %}
+<section class="inner-hero">
+  <div class="eyebrow reveal">{{ page.hero_eyebrow }}</div>
+  <h1 class="reveal reveal-delay-1">{{ page.hero_title }}</h1>
+  <p class="inner-lead reveal reveal-delay-2">
+    {{ page.hero_text }}
+  </p>
+</section>
+
+<section class="section service-detail-grid">
+  {% for service in page.services.all %}
+    <article class="detail-card reveal {% if forloop.counter == 2 %}reveal-delay-1{% elif forloop.counter == 3 %}reveal-delay-2{% endif %}">
+      <div class="card-kicker">{{ service.kicker }}</div>
+      <h3>{{ service.title }}</h3>
+      <p>{{ service.description }}</p>
+
+      {% if service.features.all %}
+        <ul>
+          {% for feature in service.features.all %}
+            <li>{{ feature.text }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </article>
+  {% endfor %}
+</section>
+
+<section class="cta-panel reveal">
+  <div>
+    <div class="eyebrow">{{ page.cta_eyebrow }}</div>
+    <h2>{{ page.cta_title }}</h2>
+  </div>
+  <a class="btn btn-primary" href="{{ page.cta_button_url }}">
+    {{ page.cta_button_text }}
+  </a>
+</section>
+{% else %}
+<section class="inner-hero">
+  <h1>Страница услуг пока не заполнена</h1>
+</section>
+{% endif %}
+{% endblock %}

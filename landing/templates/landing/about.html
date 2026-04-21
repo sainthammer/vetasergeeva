@@ -1,0 +1,54 @@
+{% extends "landing/base.html" %}
+{% block title %}Обо мне — VETA SERGEEVA{% endblock %}
+{% block nav_about %}is-active{% endblock %}
+
+{% block content %}
+
+{% if page %}
+  <section class="inner-hero">
+    <div class="eyebrow reveal">{{ page.hero_eyebrow }}</div>
+    <h1 class="reveal reveal-delay-1">{{ page.hero_title }}</h1>
+    <p class="inner-lead reveal reveal-delay-2">
+      {{ page.hero_text }}
+    </p>
+  </section>
+
+  <section class="section two-col">
+    <div class="reveal">
+      <h2>{{ page.values_title }}</h2>
+    </div>
+    <div class="stack-list">
+      {% for value in page.values.all %}
+        <div class="stack-item reveal {% if forloop.counter == 2 %}reveal-delay-1{% elif forloop.counter == 3 %}reveal-delay-2{% endif %}">
+          <span>{{ value.title }}</span>
+          <p>{{ value.description }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="section timeline-section">
+    <div class="section-head reveal">
+      <div class="eyebrow">{{ page.timeline_eyebrow }}</div>
+      <h2>{{ page.timeline_title }}</h2>
+    </div>
+
+    <div class="timeline">
+      {% for item in page.timeline_items.all %}
+        <div class="timeline-item reveal {% if forloop.counter == 2 %}reveal-delay-1{% elif forloop.counter == 3 %}reveal-delay-2{% endif %}">
+          <div class="timeline-year">{{ item.period }}</div>
+          <div>
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.description }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+  {% else %}
+  <section class="inner-hero">
+    <h1>Страница пока не заполнена</h1>
+  </section>
+{% endif %}
+  {% endblock %}
+

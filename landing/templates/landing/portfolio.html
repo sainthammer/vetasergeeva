@@ -1,0 +1,48 @@
+{% extends "landing/base.html" %}
+{% load static %}
+
+{% block title %}Портфолио — VETA SERGEEVA{% endblock %}
+{% block nav_portfolio %}is-active{% endblock %}
+
+{% block content %}
+<section class="inner-hero">
+  <div class="eyebrow reveal">портфолио</div>
+  <h1 class="reveal reveal-delay-1">Избранные проекты и визуальные кейсы.</h1>
+  <p class="inner-lead reveal reveal-delay-2">
+    Здесь собраны проекты по веб-дизайну, визуальной упаковке и SMM. Каждый кейс можно открыть и посмотреть подробнее.
+  </p>
+</section>
+
+<section class="section project-grid">
+  {% for project in projects %}
+    <article class="project-card {% if forloop.first %}large{% endif %} reveal">
+      {% if project.cover_image %}
+        <a href="{{ project.get_absolute_url }}" class="project-image-link">
+          <img src="{{ project.cover_image.url }}" alt="{{ project.title }}" class="project-cover-image">
+        </a>
+      {% endif %}
+
+      <div class="project-content">
+        {% if project.category %}
+          <div class="project-meta">{{ project.category }}</div>
+        {% endif %}
+
+        <h3>
+          <a href="{{ project.get_absolute_url }}">{{ project.title }}</a>
+        </h3>
+
+        <p>{{ project.short_description }}</p>
+
+        <a href="{{ project.get_absolute_url }}" class="project-link">
+          Смотреть кейс
+        </a>
+      </div>
+    </article>
+  {% empty %}
+    <div class="empty-state reveal">
+      <h3>Пока нет проектов</h3>
+      <p>Добавь проекты через Django admin, и они появятся здесь автоматически.</p>
+    </div>
+  {% endfor %}
+</section>
+{% endblock %}

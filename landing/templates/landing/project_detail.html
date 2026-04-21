@@ -1,0 +1,51 @@
+{% extends "landing/base.html" %}
+{% load static %}
+
+{% block title %}{{ project.title }} — VETA SERGEEVA{% endblock %}
+
+{% block content %}
+<section class="inner-hero">
+  <div class="eyebrow reveal">
+    {% if project.category %}{{ project.category }}{% else %}проект{% endif %}
+  </div>
+  <h1 class="reveal reveal-delay-1">{{ project.title }}</h1>
+  <p class="inner-lead reveal reveal-delay-2">{{ project.short_description }}</p>
+</section>
+
+<section class="section case-layout">
+  <div class="case-info reveal">
+    {% if project.client %}
+      <div class="case-row">
+        <span>Клиент</span>
+        <strong>{{ project.client }}</strong>
+      </div>
+    {% endif %}
+
+    {% if project.full_description %}
+      <div class="case-description">
+        {{ project.full_description|linebreaks }}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<section class="section case-gallery">
+  <div class="section-head reveal">
+    <div class="eyebrow">примеры работ</div>
+    <h2>Визуалы и экраны проекта</h2>
+  </div>
+
+  <div class="case-gallery-grid">
+    {% for image in project.images.all %}
+      <figure class="case-gallery-item reveal">
+        <img src="{{ image.image.url }}" alt="{{ image.caption|default:project.title }}">
+        {% if image.caption %}
+          <figcaption>{{ image.caption }}</figcaption>
+        {% endif %}
+      </figure>
+    {% empty %}
+      <p class="muted">Для этого проекта пока не добавлены изображения.</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

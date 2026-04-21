@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+
+# Виртуальное окружение
+venv/
+env/
+.venv/
+
+# Секреты — никогда не коммитим!
+.env
+
+# Django
+staticfiles/
+media/
+exaplesite/
+db.sqlite3
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Docker
+*.log
